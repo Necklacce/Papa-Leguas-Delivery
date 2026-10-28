@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0576ad">
+  <title>Papa-Léguas Delivery Co. — A fome não espera</title>
+  <meta name="description" content="Peça sua comida favorita com a velocidade do Papa-Léguas.">
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Nunito+Sans:wght@400;600;700;800;900&family=Bangers&family=Kalam:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root{--blue:#0579b4;--deep:#00375e;--navy:#062b4a;--yellow:#ffb51b;--orange:#ff8500;--cream:#fff9ed;--ink:#ffffff;--muted:#5a7082;--line:#e8e1d4}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--cream);color:var(--ink);font-family:"Nunito Sans",Arial,sans-serif}button,input{font:inherit}button{cursor:pointer}
+    .hero{min-height:330px;background:#fff url("assets/hero.jpg") center/cover no-repeat;position:relative;isolation:isolate;border-bottom:1px solid #eee}
+    /* The reference artwork is retained as the hero's visual anchor; the working search sits below it on small screens. */
+
+    .topbar{position:relative;z-index:2;min-height:62px;display:flex;align-items:center;gap:26px;padding:12px 5.5%;background:#092f52}
+    .brand{display:flex;align-items:center;gap:7px;color:var(--ink);text-decoration:none;font:900 italic 24px/.82 "Barlow Condensed",sans-serif;white-space:nowrap}
+    .brand-bird{display:inline-flex;transform:rotate(-12deg)}.brand-bird img{display:block;width:36px;height:36px;object-fit:contain}
+    .brand small{display:block;font:800 8px "Nunito Sans";letter-spacing:2.4px;margin-top:4px}
+    .main-nav{display:flex;align-items:center;gap:clamp(12px,2vw,30px);flex:1}
+    .main-nav a{color:var(--ink);text-decoration:none;font-size:11px;font-weight:800;padding:8px 0;white-space:nowrap}
+    .main-nav a.active{border-bottom:2px solid var(--orange)}
+    .top-actions{display:flex;align-items:center;gap:22px;font-size:9px;white-space:nowrap}.delivery-location{display:flex;align-items:center;gap:6px;border:0;background:transparent;color:inherit;text-align:left;padding:4px 6px;border-radius:8px}.delivery-location:hover,.delivery-location:focus-visible{background:#eaf5fb;color:#092f52;outline:2px solid #8ec9e6}.delivery-location>svg{width:18px;height:18px;fill:var(--blue);color:var(--blue)}.delivery-location .tiny-icon{width:12px;height:12px;fill:none}
+    .top-actions b{font-size:10px}.cart{position:relative;font-size:18px;display:inline-flex}.cart svg{width:21px;height:21px}.cart sup{position:absolute;right:-8px;top:-5px;border-radius:50%;background:var(--orange);color:#fff;padding:2px 5px;font-size:9px}.user-icon{border:2px solid #d6e0e7;border-radius:50%;padding:5px;color:var(--blue);display:inline-flex}.user-icon svg{width:17px;height:17px}
+    .hero-copy{position:absolute;z-index:1;left:5.6%;top:26%;max-width:48%;color:var(--ink)}
+    .turbo-tag{display:inline-flex;align-items:center;gap:4px;background:var(--yellow);color:#082e4d;border-radius:20px;padding:5px 12px;font:900 italic 10px "Barlow Condensed";transform:rotate(-3deg)}.turbo-tag svg{width:13px;height:13px;stroke-width:3}
+    .hero-copy h1{font:900 italic clamp(26px,3.1vw,44px)/1.2 "Barlow Condensed",sans-serif;margin:12px 0 7px;letter-spacing:-0.5px}
+    .hero-copy h1 em{color:var(--orange);font-style:italic}.hero-copy p{font-size:12px;margin:0;color:#ffffff}
+    .hero-search{top:65%}
+    /* Sombra atrás dos textos do hero para garantir leitura sobre a arte */
+    .hero-copy h1{text-shadow:0 2px 3px #00203ccc,0 4px 16px #00203c99,0 0 32px #00203c66}
+    .hero-copy p{text-shadow:0 1px 3px #00203ccc,0 2px 10px #00203c99}
+    .turbo-tag{box-shadow:0 3px 10px #00203c55}
+    .brand,.main-nav a{text-shadow:0 1px 3px #0006}
+    .categories{text-shadow:0 1px 3px #000c,0 2px 10px #00203c99}
+    .category .ico{filter:drop-shadow(0 2px 3px #00203caa)}
+
+    .hero-search{position:absolute;left:5.5%;top:69%;width:min(34%,430px);display:flex;background:#fff;border-radius:999px;padding:5px;box-shadow:0 8px 20px #002f4d30}
+    .hero-search input{border:0;outline:0;min-width:0;flex:1;padding:9px 13px;background:transparent;color:var(--ink);font-size:13px}
+    .hero-search button{border:0;background:var(--orange);color:#fff;border-radius:50%;width:34px;height:34px;display:grid;place-items:center}.hero-search button svg{width:18px;height:18px}
+    .categories{position:absolute;left:5.6%;top:84%;display:flex;gap:clamp(14px,2.6vw,38px);color:#fff;text-shadow:0 1px 4px #0008;font-size:11px;font-weight:800}
+    .category{display:grid;justify-items:center;gap:4px;min-width:32px}.category .ico{color:var(--yellow);font-size:22px;line-height:1;display:grid;place-items:center}.category .ico svg{width:22px;height:22px;stroke-width:2.2}
+    .section{max-width:1440px;margin:auto;padding:15px 24px}
+    .section-title{display:flex;align-items:center;gap:9px;margin:0 0 10px;font:800 22px/1 "Barlow Condensed",sans-serif;font-style:italic;letter-spacing:-.2px;color:#092f52}
+    .speed-mark{width:24px;height:14px;display:inline-block;transform:skew(-28deg);background:linear-gradient(90deg,#ff8a00 0 28%,#ffc52d 28% 54%,#168bc1 54% 75%,#ff8a00 75%)}
+    .main-grid{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(250px,.82fr);gap:14px;align-items:start}
+    .missions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    .mission{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 4px #173b5210;transition:transform .2s,box-shadow .2s;min-width:0}
+    .mission:hover{transform:translateY(-3px);box-shadow:0 8px 18px #173b521a}
+    .mission img{display:block;width:100%;height:72px;object-fit:cover;background:#fff}
+    .mission-body{padding:7px 10px 9px;display:flex;align-items:center;justify-content:space-between;gap:5px}
+    .mission h3{font:800 15px/1.05 "Barlow Condensed",sans-serif;font-style:italic;margin:0 0 3px;color:#092f52}
+    .mission p{font-size:10px;margin:0;color:#294b67;line-height:1.3}
+    .round-arrow{flex:0 0 21px;width:21px;height:21px;border:0;border-radius:50%;background:var(--deep);color:white;font-weight:900;font-size:14px;display:grid;place-items:center;padding:0}.round-arrow svg{width:13px;height:13px;stroke-width:2.8}
+    /* Restaurantes em destaque (mesmo padrão visual dos cards de missão) */
+    .restaurants-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}.restaurants-head .section-title{margin:0 0 10px}
+    .see-all{display:inline-flex;align-items:center;gap:4px;border:0;background:transparent;color:#092f52;font-size:11px;font-weight:800;padding:2px 0 3px;border-bottom:1px solid #092f52;margin-bottom:10px}.see-all svg{width:12px;height:12px;stroke-width:2.8}
+    .restaurant .thumb{position:relative}.restaurant .thumb img{display:block}
+    .fav{position:absolute;top:6px;right:6px;width:26px;height:26px;border:0;border-radius:50%;background:#ffffffe6;color:#092f52;display:grid;place-items:center;padding:0;box-shadow:0 2px 6px #0003}.fav svg{width:14px;height:14px;stroke-width:2.4}.fav[aria-pressed=true]{color:#e0392b}.fav[aria-pressed=true] svg{fill:#e0392b}
+    .restaurant .mission-body{align-items:flex-start}.restaurant h3{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+    .rating{display:inline-flex;align-items:center;gap:2px;font:800 10px "Nunito Sans",sans-serif;color:#092f52}.rating svg{width:10px;height:10px;fill:var(--yellow);color:var(--yellow)}.rating small{font-weight:600;color:var(--muted)}
+    .rest-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:5px;font-size:9px;font-weight:700;color:#294b67}.rest-meta span{display:inline-flex;align-items:center;gap:3px}.rest-meta svg{width:11px;height:11px;stroke-width:2.4}
+    .open-status{display:inline-flex;align-items:center;gap:4px;margin-top:5px;font-size:9px;font-weight:800;color:#1e8a3c}.open-status:before{content:"";width:7px;height:7px;border-radius:50%;background:#2fb34f}
+    .restaurant .round-arrow{align-self:center}
+    .tracking{background:linear-gradient(150deg,#07598a,#032d4d);border-radius:12px;color:#fff;overflow:hidden;min-height:248px;box-shadow:0 5px 16px #07395720}
+    .tracking-head{padding:12px 14px 4px;display:flex;align-items:center;gap:8px;color:var(--yellow);font:800 16px "Barlow Condensed";font-style:italic}
+    .truck{font-size:22px;display:inline-flex}.truck svg{width:22px;height:22px;stroke-width:2.5}
+    .timeline{padding:2px 14px 12px}
+    .step{display:grid;grid-template-columns:35px 1fr auto;gap:9px;align-items:center;min-height:47px;position:relative}
+    .step:not(:last-child):after{content:"";position:absolute;left:16px;top:34px;height:23px;border-left:1px dashed #8fc8e4}
+    .step-icon{height:31px;width:31px;border:1px solid var(--yellow);border-radius:50%;display:grid;place-items:center;font-size:15px;background:#07385b}.step-icon svg{width:16px;height:16px}
+    .step strong{display:block;font-size:10px;line-height:1.3}.step small{display:block;color:#c6d8e5;font-size:8px;line-height:1.3;margin-top:2px}.step time{align-self:start;margin-top:8px;font-size:8px;color:#b7d3e5}
+    .tracking-foot{height:53px;border-top:1px solid #eee;display:flex;align-items:center;justify-content:flex-end;padding:8px 15px;color:#fff;font:800 12px "Barlow Condensed";font-style:italic}
+    .benefits{background:linear-gradient(100deg,#ffe8ad,#ffefc9);border-radius:12px;padding:13px 20px 15px}
+    .benefits-list{display:grid;grid-template-columns:repeat(4,1fr);margin-top:15px}
+    .benefit{display:flex;gap:10px;padding:0 12px;align-items:center;border-right:1px solid #d8cdb4;min-width:0}
+    .benefit:first-child{padding-left:0}.benefit:last-child{border-right:0;padding-right:0}
+    .benefit-icon{flex:0 0 38px;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--orange);color:#fff;font-size:22px;font-weight:900}.benefit-icon svg{width:22px;height:22px;stroke-width:2.5}
+    .benefit:nth-child(2) .benefit-icon{background:#f27b00}.benefit:nth-child(3) .benefit-icon{background:transparent;color:var(--orange)}.benefit:nth-child(4) .benefit-icon{background:transparent;color:var(--orange)}
+    .benefit strong{font-size:9px;display:block;margin-bottom:4px;color:#f27b00}.benefit p{font-size:8px;line-height:1.45;margin:0;color:#3c5367}
+    .lower-grid{display:grid;grid-template-columns:minmax(0,2.15fr) minmax(250px,.82fr);gap:14px;margin-top:13px;align-items:stretch}
+    .promo{min-height:110px;border-radius:12px;background:#fff;border:1px dashed #cfcfcf;position:relative;overflow:hidden;display:flex;justify-content:flex-end;align-items:center;padding:14px 5%;color:#073457}
+    .promo-copy{width:58%;text-align:center;text-shadow:0 1px #fff7}.promo h2{font:900 23px/.95 "Barlow Condensed";font-style:italic;margin:0 0 7px;text-transform:uppercase}.promo p{font-size:10px;font-weight:800;margin:0 0 9px}
+    .cta{border:0;border-radius:99px;background:var(--deep);color:#fff;padding:8px 22px;font-size:10px;font-weight:900;box-shadow:0 3px 0 #001d32;transition:transform .15s;display:inline-flex;align-items:center;gap:4px}.cta svg{width:13px;height:13px}.cta:hover{transform:translateY(-2px)}
+    footer{margin-top:0;background:#fff;color:var(--ink);border-top:1px solid #e6e6e6;min-height:66px;display:flex;align-items:center;justify-content:space-between;padding:12px 5%;gap:18px}
+    .footer-brand{font:900 italic 20px/.85 "Barlow Condensed";white-space:nowrap;display:flex;align-items:center;gap:5px}.footer-brand>img{display:block;width:26px;height:26px;object-fit:contain}.footer-brand small{display:block;font:700 8px "Nunito Sans";letter-spacing:2px;margin-left:22px;margin-top:3px}
+    .footer-slogan{font:800 italic 14px "Barlow Condensed";white-space:nowrap}.footer-links{display:flex;gap:18px;align-items:center;font-size:9px;font-weight:800;white-space:nowrap}.footer-links span{display:inline-flex;align-items:center;gap:5px}.footer-links svg{width:13px;height:13px}.social-icons{gap:9px!important}.social-icons svg{width:14px;height:14px}.slogan-icon{width:14px;height:14px;color:var(--orange);vertical-align:middle}
+
+    .location-dialog{width:min(92vw,440px);border:0;border-radius:18px;padding:0;color:#092f52;box-shadow:0 24px 80px #001a2d55}.location-dialog::backdrop{background:#001a2dcc;backdrop-filter:blur(3px)}.dialog-head{padding:20px 22px;background:linear-gradient(120deg,#07598a,#032d4d);color:white;display:flex;align-items:center;justify-content:space-between}.dialog-head h2{margin:0;font:800 24px "Barlow Condensed"}.dialog-close{border:0;background:#ffffff20;color:white;border-radius:50%;width:34px;height:34px}.location-form{padding:22px;display:grid;gap:12px}.location-form label{font-weight:800;font-size:13px}.location-form input{width:100%;border:1px solid #cbd8e1;border-radius:10px;padding:12px;color:#092f52}.dialog-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:6px}.secondary-btn{border:1px solid #cbd8e1;background:#fff;color:#092f52;border-radius:99px;padding:10px 16px;font-weight:800}
+
+    .toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#062b4a;color:#fff;padding:12px 18px;border-radius:12px;box-shadow:0 8px 30px #001a2d50;font-size:13px;z-index:10;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @media(min-width:1200px){.hero{min-height:clamp(330px,32.3vw,460px);background-size:cover}.section{padding-left:3%;padding-right:3%}.mission img{height:clamp(72px,7vw,110px)}.tracking{min-height:270px}}
+    @media(max-width:850px){.topbar{padding:10px 4%;gap:14px;flex-wrap:wrap}.main-nav{order:3;flex-basis:100%;justify-content:space-between}.top-actions{margin-left:auto}.hero-copy{top:38%;max-width:65%}.hero{min-height:300px}.hero-search{top:70%;left:5%;width:48%}.categories{top:86%;left:5%;gap:18px}.main-grid,.lower-grid{grid-template-columns:1fr}.tracking{min-height:auto}.tracking-foot{display:none}.section{padding:14px 16px}.missions{grid-template-columns:repeat(4,minmax(0,1fr))}.benefit{padding:0 8px}.benefit-icon{flex-basis:30px;width:30px;height:30px;font-size:18px}.footer-links{gap:10px}}
+    @media(max-width:560px){.topbar{min-height:58px}.brand{font-size:20px}.brand-bird{font-size:27px}.top-actions{gap:10px}.top-actions>span:first-child{display:none}.main-nav{gap:8px}.main-nav a{font-size:9px}.hero-copy{top:39%;left:5%;max-width:90%}.hero-copy h1{font-size:28px}.hero-copy p{font-size:10px}.hero{min-height:280px}.hero-search{top:70%;left:5%;width:66%}.categories{top:86%;gap:16px;font-size:10px}.category .ico{font-size:19px}.section{padding:13px 12px}.section-title{font-size:21px}.missions{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.mission img{height:95px}.mission h3{font-size:16px}.mission p{font-size:10px}.benefits{padding:13px}.benefits-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 0}.benefit{border-right:0;padding:0 5px}.benefit:nth-child(odd){border-right:1px solid #d8cdb4;padding-left:0}.benefit:nth-child(even){padding-right:0;padding-left:10px}.benefit strong{font-size:10px}.benefit p{font-size:9px}.promo{min-height:130px;background-position:center}.promo-copy{width:65%}.promo h2{font-size:22px}.promo p{font-size:9px}footer{flex-wrap:wrap;justify-content:center;text-align:center;padding:15px 10px;gap:12px}.footer-brand{font-size:19px}.footer-brand>svg{width:20px;height:20px}.footer-slogan{display:none}.footer-links{width:100%;justify-content:center;flex-wrap:wrap;font-size:9px}.tracking-head{font-size:17px}.step{min-height:50px}}
+
+    /* ===== Ajustes: card de pedido sobre o hero, restaurantes, promo e aba Laboratório ===== */
+    [hidden]{display:none!important}
+    .hero{background-position:60% center}
+    :root{--overlap:clamp(70px,8.6vw,128px)}
+    .tracking-wrap{position:relative}
+    @media(min-width:851px){
+      .main-grid{align-items:stretch}
+      .tracking-wrap{min-height:175px}
+      .tracking{position:absolute;left:0;right:0;bottom:0;top:calc(-1 * var(--overlap));z-index:4;display:flex;flex-direction:column;min-height:0;border:1px solid #ffffff2a;box-shadow:0 12px 30px #03233d45}
+      .tracking .timeline{flex:1;display:flex;flex-direction:column;justify-content:center}
+    }
+    /* Faixa intermediária: menu em duas linhas para nada sair da tela */
+    @media(min-width:851px) and (max-width:1180px){
+      .topbar{flex-wrap:wrap;gap:12px 14px;padding:10px 4%}.main-nav{order:3;flex-basis:100%;justify-content:space-between}.top-actions{margin-left:auto}
+      .hero{min-height:340px}.hero-copy{top:38%;max-width:62%}.hero-search{top:71%;left:5%;width:44%}.categories{top:87%;left:5%;gap:18px}
+    }
+    /* Telas pequenas: textos do hero em fluxo normal (sem sobreposição entre título, busca e categorias) */
+    @media(max-width:850px){
+      .hero{min-height:0;display:flex;flex-direction:column;padding-bottom:20px}
+      .hero-copy,.hero-search,.categories{position:static;left:auto;top:auto;margin-left:5%;margin-right:5%}
+      .hero-copy{max-width:none;margin-top:38px}
+      .hero-search{width:auto;max-width:520px;margin-top:16px}
+      .categories{margin-top:18px;flex-wrap:wrap;gap:12px 20px}
+    }
+    @media(max-width:560px){.main-nav{flex-wrap:wrap;gap:0 12px}}
+    /* Rodapé legível (texto branco sobre azul) e sem estouro lateral */
+    footer{background:#092f52;color:#fff;border-top:0}
+    @media(max-width:900px){footer{flex-wrap:wrap;justify-content:center;text-align:center;gap:12px}.footer-slogan{display:none}.footer-links{flex-wrap:wrap;justify-content:center;gap:12px 16px}}
+    .restaurants-section{padding-top:6px;padding-bottom:6px}.restaurants-head{margin-top:4px}
+    .restaurants-section .restaurants{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+    .restaurants-section .mission img{height:clamp(110px,11vw,160px)}
+    .restaurants-section .restaurant h3{font-size:17px}.restaurants-section .restaurant p{font-size:11px}.restaurants-section .rest-meta,.restaurants-section .open-status{font-size:10px}
+    @media(max-width:1000px){.restaurants-section .restaurants{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:460px){.restaurants-section .restaurants{grid-template-columns:minmax(0,1fr)}.restaurants-section .mission img{height:150px}}
+    .benefit-link{cursor:pointer;border-radius:10px}.benefit-link:hover strong,.benefit-link:focus-visible strong{text-decoration:underline}.benefit-link:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+    .promo{border:0;justify-content:flex-start;min-height:150px;padding:18px 7%;color:#073457;box-shadow:0 8px 20px #b85f0030;background:radial-gradient(circle at 84% 42%,#ffd75f 0 20%,transparent 21%),repeating-linear-gradient(-16deg,#ffffff26 0 2px,transparent 2px 24px),linear-gradient(120deg,#ffbd24,#ff8500)}
+    .promo-copy{position:relative;z-index:1;width:min(66%,310px);text-align:left;text-shadow:none}.promo h2{font-size:clamp(24px,2.3vw,31px);line-height:.92;transform:rotate(-3deg) skewX(-6deg);transform-origin:left center;margin:0 0 12px}.promo p{font-size:11px;margin:0 0 12px}
+    .promo-bird{position:absolute;right:5%;top:50%;width:min(34%,130px);height:auto;aspect-ratio:1;transform:translateY(-50%) rotate(-8deg);color:#0a4f86;stroke-width:1.6;filter:drop-shadow(0 6px 6px #7a3d0040)}
+    /* ===== Laboratório ACME (cenário interativo) ===== */
+    body.lab-mode .hero{min-height:0;background:#092f52;border-bottom:0;padding-bottom:0}
+    body.lab-mode .hero-copy,body.lab-mode .hero-search,body.lab-mode .categories{display:none}
+    .lab-section{--navy:#0b2c4e;--paper:#fbf0d4;--paper2:#f3dfb0;--red:#e5412b;--acme-blue:#0d4a85;max-width:1440px;margin:0 auto;padding:14px 16px 26px;scroll-margin-top:0}
+    .acme-stage{position:relative;isolation:isolate;overflow:hidden;border-radius:22px;padding:18px clamp(14px,2vw,28px) 0;background:linear-gradient(180deg,#4fa9e0 0,#8fd0f0 300px,#cfe8ee 470px,#f2d29c 560px,#e9ac6c 640px,#dc8f52 100%);box-shadow:0 14px 40px #3b1e0633;color:var(--navy)}
+    .acme-sky{position:absolute;inset:0;z-index:-1;pointer-events:none}
+    .mesas{position:absolute;left:0;right:0;top:400px;width:100%;height:200px}
+    .cloud{position:absolute;width:180px;height:46px;border-radius:50px;background:#fff;opacity:.85;filter:blur(1px);animation:cloudDrift 60s linear infinite}
+    .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+    .cloud::before{width:80px;height:70px;left:30px;top:-36px}.cloud::after{width:60px;height:50px;left:90px;top:-22px}
+    .cloud.c1{top:60px;left:30%}.cloud.c2{top:140px;left:62%;transform:scale(.7);animation-duration:80s;opacity:.7}.cloud.c3{top:34px;left:82%;transform:scale(.55);animation-duration:70s;opacity:.65}
+    @keyframes cloudDrift{from{translate:0}50%{translate:-60px}to{translate:0}}
+    .acme-desert{position:absolute;z-index:0;left:-2%;width:104%;bottom:70px;pointer-events:none}
+    .acme-stage::after{content:"";position:absolute;z-index:-1;left:0;right:0;bottom:0;height:90px;background:#d98a4a}
+    .acme-signpost{position:absolute;z-index:4;left:1.2%;bottom:46px;width:clamp(90px,8.5vw,128px);pointer-events:none;transform-origin:bottom center;animation:sway 6s ease-in-out infinite}
+    @keyframes sway{50%{transform:rotate(-2deg)}}
+
+    .acme-grid{position:relative;z-index:2;display:grid;grid-template-columns:minmax(280px,340px) minmax(0,1fr) minmax(290px,360px);grid-template-rows:auto 1fr;grid-template-areas:"title center result" "mission center result";gap:6px clamp(12px,1.6vw,24px);align-items:start}
+    .acme-title{grid-area:title;margin:0;line-height:0}
+    .acme-title img{width:100%;max-width:375px;height:auto;transform:rotate(-2deg);filter:drop-shadow(0 6px 10px #3a1c0645)}
+    .acme-mission{grid-area:mission}.acme-center{grid-area:center}.acme-result{grid-area:result}
+
+    /* Papel envelhecido com bordas rasgadas */
+    .paper{filter:drop-shadow(0 10px 16px #4a24063d)}
+    .paper-in{position:relative;padding:20px 20px 22px;background:radial-gradient(circle at 18% 12%,#fff8e6 0,transparent 40%),radial-gradient(circle at 85% 90%,#ecd39b 0,transparent 45%),linear-gradient(160deg,var(--paper),var(--paper2));clip-path:polygon(0 1.5%,6% 0,14% 1.2%,25% .2%,37% 1.4%,50% 0,62% 1.1%,74% .3%,86% 1.3%,94% 0,100% 1%,99.3% 12%,100% 25%,99.2% 40%,100% 55%,99.4% 70%,100% 85%,99.2% 99%,90% 100%,78% 98.9%,65% 100%,52% 99%,39% 100%,26% 98.8%,13% 100%,3% 99%,0 98%,.8% 85%,0 70%,.7% 55%,0 40%,.8% 25%,0 12%)}
+    .acme-mission h3{margin:0;font:800 22px/1 "Barlow Condensed",sans-serif;color:var(--navy)}
+    .paper-sub{margin:4px 0 14px;font-size:13px;line-height:1.35;color:#3f5368}
+    .m-row{display:flex;gap:12px;align-items:flex-start;background:#fffaf0d9;border:1px solid #e3d3ad;border-radius:14px;padding:12px;margin-top:10px}
+    .m-ico{flex:none;width:46px;height:46px;border-radius:50%;background:var(--acme-blue);color:#fff;display:grid;place-items:center;box-shadow:inset 0 -3px 0 #0003}
+    .m-ico svg{width:24px;height:24px}
+    .m-body{flex:1;min-width:0}
+    .m-head{display:flex;justify-content:space-between;align-items:baseline;font-weight:800;font-size:14px}
+    .m-head b{color:var(--acme-blue);font:900 18px "Barlow Condensed"}
+    .m-label{display:block;font-size:13px;font-weight:700;color:#2b4157}
+    .m-value{display:block;font:800 20px/1.15 "Barlow Condensed";color:var(--navy)}
+    .m-scale{display:flex;justify-content:space-between;font-size:11px;color:#5a6b7a;margin-top:2px}
+    #labBudget{--pct:18.5%;-webkit-appearance:none;appearance:none;width:100%;height:22px;background:transparent;margin:6px 0 0;cursor:pointer}
+    #labBudget::-webkit-slider-runnable-track{height:7px;border-radius:9px;background:linear-gradient(90deg,#ff8a00,#ffb51b var(--pct),#ddd5c4 var(--pct))}
+    #labBudget::-moz-range-track{height:7px;border-radius:9px;background:linear-gradient(90deg,#ff8a00,#ffb51b var(--pct),#ddd5c4 var(--pct))}
+    #labBudget::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;margin-top:-7.5px;border-radius:50%;background:#fff;border:3px solid #e9e2d2;box-shadow:0 2px 6px #0004}
+    #labBudget::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid #e9e2d2;box-shadow:0 2px 6px #0004}
+    #labBudget:focus-visible{outline:2px solid var(--acme-blue);outline-offset:3px;border-radius:9px}
+    .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin-top:8px;padding:4px;background:#ebe5d8;border-radius:10px}
+    .seg button{border:0;border-radius:8px;background:transparent;color:var(--navy);font:800 12px "Nunito Sans";padding:6px 4px;display:flex;flex-direction:column;align-items:center;gap:2px;transition:background .2s,color .2s}
+    .seg button svg{width:15px;height:15px}
+    .seg button[aria-checked=true]{background:var(--acme-blue);color:#fff;box-shadow:0 3px 8px #0d4a8550}
+    .seg button:hover:not([aria-checked=true]){background:#fff}
+    .seg button:focus-visible,.food-toggle:focus-visible,.food-opt:focus-visible{outline:2px solid var(--acme-blue);outline-offset:2px}
+    .m-food{align-items:center}
+    .food-toggle{flex:1;min-width:0;position:relative;text-align:left;border:0;background:transparent;padding:0 26px 0 0;color:inherit;border-radius:8px}
+    .food-chev{position:absolute;right:0;top:50%;width:20px;height:20px;transform:translateY(-50%);color:var(--acme-blue);transition:transform .25s}
+    .food-toggle[aria-expanded=true] .food-chev{transform:translateY(-50%) rotate(90deg)}
+    .food-list{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;animation:dropIn .25s ease}
+    .food-opt{display:flex;align-items:center;gap:7px;border:1px solid #dccca6;background:#fffaf0;border-radius:10px;padding:8px 9px;font:800 13px "Nunito Sans";color:var(--navy);text-align:left}
+    .food-opt svg{width:19px;height:19px;flex:none;color:var(--acme-blue)}
+    .food-opt[aria-checked=true]{background:var(--acme-blue);border-color:var(--acme-blue);color:#fff}.food-opt[aria-checked=true] svg{color:#ffd166}
+    .food-opt:hover:not([aria-checked=true]){border-color:var(--acme-blue)}
+    @keyframes dropIn{from{opacity:0;transform:translateY(-6px)}}
+    .hand-note{display:flex;align-items:flex-start;gap:6px;margin:14px 0 0 18px;font:700 16px/1.1 "Kalam",cursive;color:var(--navy);transform:rotate(-6deg)}
+    .hand-note svg{width:34px;height:26px;flex:none;color:var(--navy)}
+
+    /* Máquina */
+    .acme-center{position:relative;padding-top:clamp(64px,8vw,112px);min-width:0}
+    .bubble{position:absolute;z-index:3;pointer-events:none;filter:drop-shadow(0 4px 6px #0003)}
+    .b-prep{top:0;left:2%;width:min(40%,246px);transform-origin:80% 100%;animation:bob 3.2s ease-in-out infinite}
+    .b-jeito{top:clamp(10px,2vw,28px);right:2%;width:min(25%,155px);transform-origin:10% 100%;animation:bob 3.6s ease-in-out .8s infinite}
+    @keyframes bob{50%{transform:translateY(-6px) rotate(-1.5deg)}}
+    .is-brewing .b-prep{animation:talk .35s ease-in-out infinite}
+    @keyframes talk{0%,100%{transform:scale(1) rotate(0)}50%{transform:scale(1.06) rotate(-2deg)}}
+    .machine{position:relative;width:min(100%,600px);margin:0 auto;container-type:inline-size}
+    .machine-img{display:block;width:100%;height:auto;filter:drop-shadow(0 18px 18px #4a240650)}
+    .is-brewing .machine{animation:rattle .12s linear infinite}
+    @keyframes rattle{0%{transform:translate(0,0)}25%{transform:translate(1px,-1px)}50%{transform:translate(-1px,1px)}75%{transform:translate(1px,1px)}}
+
+    .m-checklist{position:absolute;left:6.7%;top:38.6%;width:17.2%;height:26.4%;margin:0;padding:1.4cqw 1.3cqw;list-style:none;display:flex;flex-direction:column;justify-content:space-around;background:linear-gradient(170deg,#fdebb9,#f4dba2);border-radius:.4cqw;box-shadow:inset 0 0 0 .2cqw #e7cc8e}
+    .m-checklist li{display:flex;align-items:center;justify-content:space-between;gap:.6cqw;font:800 clamp(7px,1.75cqw,11px)/1.05 "Barlow Condensed",sans-serif;text-transform:uppercase;color:#1b2a3a;border-bottom:.15cqw dashed #b99b62;padding-bottom:.5cqw}
+    .m-checklist li:last-child{border-bottom:0}
+    .m-checklist .ck{flex:none;width:2.6cqw;height:2.6cqw;color:#178a2c;transform:scale(0) rotate(-30deg);transition:transform .25s cubic-bezier(.3,1.8,.5,1)}
+    .m-checklist li.done .ck{transform:scale(1) rotate(0)}
+
+    .m-capsule{position:absolute;left:30.4%;top:35.4%;width:25.2%;height:33.6%;border-radius:12% / 6%;overflow:hidden;pointer-events:none}
+    .cap-cover{position:absolute;inset:0;display:grid;place-items:center;opacity:0;transition:opacity .4s;background:radial-gradient(ellipse at 50% 55%,#fff6c9 0,#ffd66b 30%,#f7a42c 62%,#d9661bcc 85%,#b5481500 100%)}
+    .m-capsule.show-icon .cap-cover{opacity:1}
+    .cap-icon{color:#7a2d06;width:58%;filter:drop-shadow(0 0 1.5cqw #fff8)}
+    .cap-icon svg{display:block;width:100%;height:auto;stroke-width:1.6;animation:floaty 2.4s ease-in-out infinite}
+    @keyframes floaty{50%{transform:translateY(-5%) rotate(-4deg)}}
+    .cap-flash{position:absolute;inset:0;opacity:0;background:radial-gradient(ellipse at 50% 60%,#fffef2 0,#ffe68a 40%,#ffb83f99 75%,transparent)}
+    .is-brewing .cap-flash{animation:flash .5s ease-in-out infinite alternate}
+    @keyframes flash{from{opacity:.25}to{opacity:.95}}
+    .cap-bubbles i{position:absolute;bottom:-10%;width:5cqw;height:5cqw;max-width:30px;max-height:30px;border-radius:50%;border:.3cqw solid #fff9;background:#fff3;opacity:0}
+    .cap-bubbles i:nth-child(1){left:12%}.cap-bubbles i:nth-child(2){left:38%;width:3cqw;height:3cqw}.cap-bubbles i:nth-child(3){left:60%}.cap-bubbles i:nth-child(4){left:78%;width:2.4cqw;height:2.4cqw}.cap-bubbles i:nth-child(5){left:25%;width:2cqw;height:2cqw}
+    .is-brewing .cap-bubbles i{animation:rise 1.1s ease-in infinite}
+    .cap-bubbles i:nth-child(2){animation-delay:.2s!important}.cap-bubbles i:nth-child(3){animation-delay:.45s!important}.cap-bubbles i:nth-child(4){animation-delay:.65s!important}.cap-bubbles i:nth-child(5){animation-delay:.85s!important}
+    @keyframes rise{0%{opacity:0;transform:translateY(0)}20%{opacity:1}100%{opacity:0;transform:translateY(-34cqw)}}
+
+    .m-screen{position:absolute;left:7.4%;top:73.4%;width:9.2%;height:7.4%;border-radius:.8cqw;background:radial-gradient(circle at 50% 45%,#0b6d7c,#043f4a 80%);display:grid;place-items:center;color:#8ff3ff}
+    .m-screen svg{width:70%;height:auto;stroke-width:1.6;filter:drop-shadow(0 0 .8cqw #6ff0ff)}
+    .is-brewing .m-screen svg{animation:blink .3s steps(2) infinite}
+    @keyframes blink{50%{opacity:.2}}
+    .m-lamp{position:absolute;left:97.2%;top:50.8%;width:7cqw;height:7cqw;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,#fff6b0 0,#ff9a3c66 40%,transparent 70%);opacity:.4;animation:glow 2s ease-in-out infinite;pointer-events:none}
+    .is-brewing .m-lamp{animation-duration:.3s;opacity:1}
+    @keyframes glow{50%{opacity:.9;transform:translate(-50%,-50%) scale(1.25)}}
+    .steam{position:absolute;left:42.8%;top:1%;width:1px;height:1px;pointer-events:none}
+    .steam i{position:absolute;left:-2.5cqw;top:0;width:5cqw;height:5cqw;border-radius:50%;background:#fff;opacity:0;filter:blur(3px)}
+    .is-brewing .steam i{animation:puff 1.2s ease-out infinite}
+    .steam i:nth-child(2){animation-delay:.3s!important}.steam i:nth-child(3){animation-delay:.6s!important}.steam i:nth-child(4){animation-delay:.9s!important}
+    @keyframes puff{0%{opacity:.8;transform:translate(0,0) scale(.6)}100%{opacity:0;transform:translate(3cqw,-14cqw) scale(2.4)}}
+    .m-button{position:absolute;left:17.6%;top:83.1%;width:8.4%;aspect-ratio:1.5;transform:translate(-50%,-50%);border:0;border-radius:50%;background:transparent;cursor:pointer;padding:0}
+    .m-button::after{content:"";position:absolute;inset:-25%;border-radius:50%;border:2px solid #ffd166;opacity:0;animation:ping 2.2s ease-out infinite}
+    .m-button:hover::before,.m-button:focus-visible::before{content:"";position:absolute;inset:-8%;border-radius:50%;box-shadow:0 0 0 3px #fff,0 0 18px 6px #ff5a3caa}
+    .m-button:focus-visible{outline:0}
+    .m-button:active{transform:translate(-50%,-44%)}
+    @keyframes ping{0%{opacity:.9;transform:scale(.7)}80%,100%{opacity:0;transform:scale(1.5)}}
+    .button-hint{position:relative;z-index:3;width:max-content;max-width:100%;margin:8px auto 0;padding:4px 14px;border-radius:999px;background:#fff6e2e6;box-shadow:0 3px 10px #5a2c0a30;text-align:center;font:700 15px "Kalam",cursive;color:#5b2a0c;display:flex;justify-content:center;align-items:center;gap:6px}
+    .button-hint svg{width:16px;height:16px}
+
+    /* Cartão do resultado */
+    .acme-result{margin-top:4px}
+    .acme-result .paper-in{padding:22px 22px 24px}
+    .today-tag{display:inline-block;background:var(--red);color:#fff;font:400 18px/1 "Bangers",cursive;letter-spacing:.8px;text-transform:uppercase;padding:8px 18px 7px 14px;transform:rotate(-5deg);clip-path:polygon(2% 10%,30% 0,62% 8%,98% 2%,100% 60%,96% 100%,60% 90%,25% 100%,0 88%)}
+    .combo-name{margin:10px 0 0;font:400 clamp(34px,3vw,46px)/.9 "Bangers",cursive;letter-spacing:.5px;color:var(--navy);text-transform:uppercase;transform:rotate(-4deg);transform-origin:left center;text-shadow:2px 2px 0 #fff8}
+    .combo-tagline{margin:8px 0 12px;font:700 16px/1.15 "Kalam",cursive;color:var(--navy);transform:rotate(-4deg);transform-origin:left center}
+    .combo-items{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+    .combo-items li{display:grid;grid-template-columns:42px 1fr;gap:10px;align-items:center}
+    .combo-items .ci{color:var(--navy)}.combo-items .ci svg{width:38px;height:38px;stroke-width:1.5}
+    .combo-items strong{display:block;font:800 17px/1.1 "Barlow Condensed";color:var(--navy)}
+    .combo-items small{display:block;font-size:12px;line-height:1.3;color:#4a5b6b}
+    .price-wrap{margin:16px 0 4px;display:flex;justify-content:center}
+    .price-brush{position:relative;display:flex;align-items:flex-end;gap:8px;padding:10px 26px 8px 22px;background:#ffb51b;transform:rotate(-6deg);clip-path:polygon(4% 18%,22% 4%,48% 10%,76% 0,100% 12%,97% 52%,100% 88%,70% 100%,40% 92%,12% 100%,0 76%,3% 46%);color:var(--navy)}
+    .price-brush span{font:400 22px/1 "Bangers",cursive;text-transform:uppercase;transform:rotate(-8deg);margin-bottom:12px}
+    .price-brush strong{font:400 56px/.9 "Bangers",cursive;letter-spacing:1px;white-space:nowrap}
+    .price-brush sup{font-size:.55em;vertical-align:.7em;margin-left:1px}
+    .budget-note{margin:8px 0 0;min-height:0;text-align:center;font-size:12px;font-weight:700;color:#7a3b0a}
+    .budget-note:empty{display:none}
+    .budget-note.over{color:#b3261e}
+    .respect{display:flex;align-items:center;gap:12px;margin-top:14px;padding:10px 18px 10px 12px;background:#0b4c8c;border-radius:999px 999px 999px 999px;clip-path:polygon(2% 20%,8% 0,94% 4%,100% 40%,98% 84%,90% 100%,6% 96%,0 70%);color:#fff;font:800 italic 15px/1.1 "Barlow Condensed";text-transform:uppercase}
+    .respect img{width:46px;height:auto;flex:none;transform:scaleX(-1)}
+    .pop{animation:pop .5s cubic-bezier(.3,1.6,.5,1)}
+    @keyframes pop{0%{transform:scale(.94);opacity:.4}100%{transform:scale(1);opacity:1}}
+    .combo-name.pop{animation:popName .5s cubic-bezier(.3,1.6,.5,1)}
+    @keyframes popName{0%{transform:rotate(-4deg) scale(.8);opacity:0}100%{transform:rotate(-4deg) scale(1);opacity:1}}
+    .acme-result.brewing .paper-in>*:not(.today-tag){opacity:.35;filter:blur(1px);transition:opacity .2s,filter .2s}
+
+    /* Faixa inferior */
+    .acme-band{position:relative;z-index:3;margin:18px calc(-1 * clamp(14px,2vw,28px)) 0;padding:16px clamp(16px,3vw,40px) 18px clamp(110px,10vw,160px);display:flex;align-items:center;gap:clamp(14px,2vw,30px);background:linear-gradient(180deg,#0e3762,#082647);color:#fff;clip-path:polygon(0 14%,8% 6%,20% 12%,40% 2%,62% 10%,80% 0,100% 8%,100% 100%,0 100%);overflow:hidden}
+    .beep-tag{flex:none;font:400 34px/1 "Bangers",cursive;letter-spacing:1px;color:var(--navy);background:#ffb51b;padding:8px 20px 6px 16px;transform:rotate(-7deg);clip-path:polygon(0 18%,30% 4%,70% 10%,100% 0,96% 70%,100% 100%,55% 92%,4% 100%)}
+    .band-feats{list-style:none;margin:0;padding:0;display:flex;flex:1;justify-content:center;gap:clamp(12px,2.2vw,34px)}
+    .band-feats li{display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.2;padding-left:clamp(12px,2.2vw,34px);border-left:1px solid #ffffff40}
+    .band-feats li:first-child{border-left:0;padding-left:0}
+    .band-feats svg{width:32px;height:32px;stroke-width:1.5;flex:none}
+    .band-cta{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:310px}
+    .band-cta small{font-size:10px;line-height:1.3;color:#d6e3ef;text-align:center}
+    .acme-cta{display:inline-flex;align-items:center;gap:10px;border:3px solid #fff3;border-radius:999px;padding:12px 22px;background:linear-gradient(180deg,#ffc53d,#ff9500);color:var(--navy);font:900 21px/1 "Barlow Condensed",sans-serif;text-transform:uppercase;box-shadow:0 5px 0 #b45d00,0 10px 18px #0006;transition:transform .15s,box-shadow .15s}
+    .acme-cta svg{width:22px;height:22px;stroke-width:2.6}
+    .acme-cta:hover{transform:translateY(-2px);box-shadow:0 7px 0 #b45d00,0 14px 22px #0006}
+    .acme-cta:active{transform:translateY(3px);box-shadow:0 2px 0 #b45d00,0 6px 10px #0006}
+    .acme-cta:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    .dash-bird{position:absolute;left:0;top:50%;width:44px;opacity:0;pointer-events:none;transform:translate(-80px,-50%)}
+    .acme-band.dash .dash-bird{animation:dash .9s cubic-bezier(.5,0,.5,1)}
+    @keyframes dash{0%{opacity:1;transform:translate(-80px,-50%)}100%{opacity:1;transform:translate(110vw,-50%)}}
+    .cart.bump{animation:bump .5s}
+    @keyframes bump{40%{transform:scale(1.35)}}
+
+    /* Responsivo */
+    @media(max-width:1180px){
+      .acme-grid{grid-template-columns:1fr 1fr;grid-template-rows:auto;grid-template-areas:"title title" "center center" "mission result"}
+      .acme-title{text-align:center}.acme-title img{max-width:340px}
+      .acme-center{padding-top:clamp(60px,10vw,110px)}
+      .mesas{display:none}
+      .acme-stage{background:linear-gradient(180deg,#4fa9e0 0,#8fd0f0 320px,#cfe8ee 560px,#f2d29c 760px,#e9ac6c 900px,#dc8f52 100%)}
+    }
+    @media(max-width:900px){
+      .acme-band{flex-direction:column;padding:34px 18px 22px;clip-path:polygon(0 4%,20% 0,45% 3%,70% 0,100% 3%,100% 100%,0 100%)}
+      .band-feats{flex-wrap:wrap;gap:12px 18px}
+      .band-feats li{border-left:0;padding-left:0}
+      .acme-signpost{display:none}
+    }
+    @media(max-width:720px){
+      .lab-section{padding:10px 8px 18px}
+      .acme-stage{border-radius:16px;padding:12px 12px 0}
+      .acme-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "center" "mission" "result";gap:12px}
+      .acme-title img{max-width:280px}
+      .b-prep{width:44%}.b-jeito{width:30%}
+      .acme-band{margin:16px -12px 0}
+      .combo-name{font-size:38px}
+      .price-brush strong{font-size:48px}
+      .band-feats{flex-direction:column;align-items:flex-start}
+      .acme-cta{font-size:19px;padding:12px 18px}
+      .acme-desert{bottom:auto;top:calc(var(--machine-bottom,0px) - 40px);display:none}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .cloud,.acme-signpost,.bubble,.cap-icon svg,.m-lamp,.m-button::after{animation:none!important}
+      .is-brewing .machine{animation:none}
+    }
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <header class="hero" aria-label="Papa-Léguas Delivery">
+    <div class="topbar">
+      <a class="brand" href="#" aria-label="Papa-Léguas Delivery Co."><span class="brand-bird"><img src="assets/lab/bird.png" alt="" width="36" height="36"></span><span>PAPA-LÉGUAS<small>DELIVERY CO.</small></span></a>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a class="active" href="#inicio">Início</a><a href="#restaurantes">Restaurantes</a><a href="#ofertas">Ofertas</a><a href="#laboratorio">Laboratório ACME</a><a href="#beepbeep">Beep-Beep Club</a><a href="#sobre">Sobre</a>
+      </nav>
+      <div class="top-actions"><button class="delivery-location" id="openLocation" type="button" aria-haspopup="dialog" aria-controls="locationDialog"><i data-lucide="map-pin"></i><span>Entregar em<br><b id="currentCity">São Paulo, SP</b></span><i data-lucide="chevron-down" class="tiny-icon"></i></button><span class="cart" aria-label="Carrinho"><i data-lucide="shopping-cart"></i><sup>2</sup></span><span class="user-icon" aria-label="Minha conta"><i data-lucide="user-round"></i></span></div>
+    </div>
+    <div class="hero-copy" id="inicio">
+      <span class="turbo-tag"><i data-lucide="zap"></i> ENTREGA EM MODO TURBO</span>
+      <h1>A FOME NÃO ESPERA.<br><em>A GENTE TAMBÉM NÃO.</em></h1>
+      <p></p>
+    </div>
+    <form class="hero-search" id="searchForm">
+      <input id="foodSearch" type="search" placeholder="O que vamos devorar hoje?" aria-label="Buscar comida">
+      <button aria-label="Buscar" type="submit"><i data-lucide="arrow-right"></i></button>
+    </form>
+    <nav class="categories" aria-label="Categorias">
+      <div class="category"><span class="ico"><i data-lucide="sandwich"></i></span><span>Lanches</span></div>
+      <div class="category"><span class="ico"><i data-lucide="pizza"></i></span><span>Pizzas</span></div>
+      <div class="category"><span class="ico"><i data-lucide="shopping-basket"></i></span><span>Mercado</span></div>
+      <div class="category"><span class="ico"><i data-lucide="cup-soda"></i></span><span>Bebidas</span></div>
+      <div class="category"><span class="ico"><i data-lucide="candy"></i></span><span>Doces</span></div>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="section main-grid" id="missoes" aria-label="Missões e acompanhamento">
+      <div>
+        <h1 class="section-title"><span class="speed-mark"></span> Escolha sua próxima missão</h1>
+        <div class="missions">
+          <article class="mission"><img src="https://images.unsplash.com/photo-1553979459-d2229ba7433b?auto=format&fit=crop&w=700&h=420&q=75" alt="Hambúrguer suculento com bacon e queijo" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/burger.jpg'"><div class="mission-body"><div><h3>Fome de leão</h3><p>Hambúrgueres e lanches</p></div><button class="round-arrow" data-action="Fome de leão" aria-label="Explorar lanches"><i data-lucide="arrow-right"></i></button></div></article>
+          <article class="mission"><img src="https://images.unsplash.com/photo-1594179047502-07fb8a5451f6?auto=format&fit=crop&w=700&h=420&q=75" alt="Pizza artesanal em prato de cerâmica" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/pizza.jpg'"><div class="mission-body"><div><h3>Missão redonda</h3><p>Pizzas e combos</p></div><button class="round-arrow" data-action="Missão redonda" aria-label="Explorar pizzas"><i data-lucide="arrow-right"></i></button></div></article>
+          <article class="mission"><img src="https://images.unsplash.com/photo-1765480953875-a7338f896e91?auto=format&fit=crop&w=700&h=420&q=75" alt="Cestos com legumes e frutas frescas em feira" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/market.jpg'"><div class="mission-body"><div><h3>Modo abastecimento</h3><p>Mercado e conveniência</p></div><button class="round-arrow" data-action="Modo abastecimento" aria-label="Explorar mercado"><i data-lucide="arrow-right"></i></button></div></article>
+          <article class="mission"><img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&w=700&h=420&q=75" alt="Bolo de chocolate com cereja" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/dessert.jpg'"><div class="mission-body"><div><h3>Desejo urgente</h3><p>Doces e sobremesas</p></div><button class="round-arrow" data-action="Desejo urgente" aria-label="Explorar doces"><i data-lucide="arrow-right"></i></button></div></article>
+        </div>
+      </div>
+      <div class="tracking-wrap">
+      <aside class="tracking" aria-label="Acompanhe seu pedido">
+        <div class="tracking-head"><span class="truck"><i data-lucide="truck"></i></span> ACOMPANHE SEU PEDIDO</div>
+        <div class="timeline">
+          <div class="step"><span class="step-icon"><i data-lucide="cooking-pot"></i></span><div><strong>Restaurante preparando</strong><small>O combustível está sendo preparado.</small></div><time>12:24</time></div>
+          <div class="step"><span class="step-icon"><i data-lucide="truck"></i></span><div><strong>Entregador a caminho</strong><small>Poeira na estrada. Seu pedido vem aí!</small></div><time>12:37</time></div>
+          <div class="step"><span class="step-icon"><i data-lucide="house"></i></span><div><strong>Pedido entregue</strong><small>Chegamos antes da fome vencer.</small></div><time>12:42</time></div>
+        </div>
+        <div class="tracking-foot">QUASE LÁ...</div>
+      </aside>
+      </div>
+    </section>
+
+    <section class="section restaurants-section" id="restaurantes" aria-label="Restaurantes próximos">
+        <div class="restaurants-head"><h2 class="section-title"><span class="speed-mark"></span> Restaurantes em destaque</h2><button class="see-all" type="button" data-restaurant="todos os restaurantes">Ver todos <i data-lucide="arrow-right"></i></button></div>
+        <div class="missions restaurants" aria-label="Restaurantes próximos">
+          <article class="mission restaurant"><div class="thumb"><img src="https://images.pexels.com/photos/33213590/pexels-photo-33213590/free-photo-of-delicious-burger-with-fries-in-ho-chi-minh-city.jpeg?auto=compress&cs=tinysrgb&w=700&h=420&fit=crop" alt="Hambúrguer com batatas fritas servido em um prato" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/burger.jpg'"><button class="fav" type="button" aria-pressed="false" aria-label="Favoritar Burger Track"><i data-lucide="heart"></i></button></div><div class="mission-body"><div><h3>Burger Track <span class="rating"><i data-lucide="star"></i>4.8 <small>(1,2k)</small></span></h3><p>Hambúrgueres • Lanches</p><div class="rest-meta"><span><i data-lucide="clock"></i>25–40 min</span><span><i data-lucide="bike"></i>R$ 6,90</span></div><span class="open-status">Aberto</span></div><button class="round-arrow" data-restaurant="Burger Track" aria-label="Ver Burger Track"><i data-lucide="arrow-right"></i></button></div></article>
+          <article class="mission restaurant"><div class="thumb"><img src="https://images.pexels.com/photos/6223198/pexels-photo-6223198.jpeg?auto=compress&cs=tinysrgb&w=700&h=420&fit=crop" alt="Pizza de pepperoni sobre uma tábua de madeira" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/pizza.jpg'"><button class="fav" type="button" aria-pressed="false" aria-label="Favoritar Pizza Express"><i data-lucide="heart"></i></button></div><div class="mission-body"><div><h3>Pizza Express <span class="rating"><i data-lucide="star"></i>4.6 <small>(980)</small></span></h3><p>Pizzas • Massas</p><div class="rest-meta"><span><i data-lucide="clock"></i>30–50 min</span><span><i data-lucide="bike"></i>R$ 7,90</span></div><span class="open-status">Aberto</span></div><button class="round-arrow" data-restaurant="Pizza Express" aria-label="Ver Pizza Express"><i data-lucide="arrow-right"></i></button></div></article>
+          <article class="mission restaurant"><div class="thumb"><img src="https://images.pexels.com/photos/796580/pexels-photo-796580.jpeg?auto=compress&cs=tinysrgb&w=700&h=420&fit=crop" alt="Banca de frutas variadas em um mercado" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/market.jpg'"><button class="fav" type="button" aria-pressed="false" aria-label="Favoritar Mercado do Deserto"><i data-lucide="heart"></i></button></div><div class="mission-body"><div><h3>Mercado do Deserto <span class="rating"><i data-lucide="star"></i>4.5 <small>(642)</small></span></h3><p>Mercado • Bebidas • Conveniência</p><div class="rest-meta"><span><i data-lucide="clock"></i>20–40 min</span><span><i data-lucide="bike"></i>R$ 5,90</span></div><span class="open-status">Aberto</span></div><button class="round-arrow" data-restaurant="Mercado do Deserto" aria-label="Ver Mercado do Deserto"><i data-lucide="arrow-right"></i></button></div></article>
+          <article class="mission restaurant"><div class="thumb"><img src="https://images.pexels.com/photos/4078187/pexels-photo-4078187.jpeg?auto=compress&cs=tinysrgb&w=700&h=420&fit=crop" alt="Cheesecake em camadas com cobertura de chocolate" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src='assets/dessert.jpg'"><button class="fav" type="button" aria-pressed="false" aria-label="Favoritar Doce Parada"><i data-lucide="heart"></i></button></div><div class="mission-body"><div><h3>Doce Parada <span class="rating"><i data-lucide="star"></i>4.7 <small>(538)</small></span></h3><p>Doces • Sobremesas</p><div class="rest-meta"><span><i data-lucide="clock"></i>20–35 min</span><span><i data-lucide="bike"></i>R$ 5,90</span></div><span class="open-status">Aberto</span></div><button class="round-arrow" data-restaurant="Doce Parada" aria-label="Ver Doce Parada"><i data-lucide="arrow-right"></i></button></div></article>
+        </div>
+    </section>
+
+    <section class="section lower-grid" id="beneficios" aria-label="Benefícios e diversão">
+      <div class="benefits">
+        <h2 class="section-title"><span class="speed-mark"></span> Por que pedir com o Papa-Léguas?</h2>
+        <div class="benefits-list">
+          <div class="benefit"><span class="benefit-icon"><i data-lucide="zap"></i></span><div><strong>Entrega turbo</strong><p>Você escolhe o limite. Nós encontramos o caminho.</p></div></div>
+          <div class="benefit"><span class="benefit-icon"><i data-lucide="shield-check"></i></span><div><strong>Compensação garantida</strong><p>Se atrasar, você recebe um cupom.</p></div></div>
+          <div class="benefit" id="beepbeep"><span class="benefit-icon"><i data-lucide="star"></i></span><div><strong>Beep-Beep Club</strong><p>Pontos que viram recompensas de verdade.</p></div></div>
+          <div class="benefit benefit-link" data-go="laboratorio" role="link" tabindex="0"><span class="benefit-icon"><i data-lucide="flask-conical"></i></span><div><strong>Laboratório ACME</strong><p>Combos personalizados para cada fome.</p></div></div>
+        </div>
+      </div>
+      <aside class="promo" id="ofertas">
+        <i data-lucide="bird" class="promo-bird" aria-hidden="true"></i>
+        <div class="promo-copy"><h2>Teste sua velocidade!</h2><p>Consegue acompanhar o Papa-Léguas?</p><button class="cta" id="playButton">JOGAR AGORA&nbsp; <i data-lucide="arrow-right"></i></button></div>
+      </aside>
+    </section>
+  </main>
+
+  <section class="lab-section" id="laboratorio" hidden aria-label="Laboratório ACME">
+    <div class="acme-stage" id="acmeStage">
+      <div class="acme-sky" aria-hidden="true">
+        <span class="cloud c1"></span><span class="cloud c2"></span><span class="cloud c3"></span>
+        <svg class="mesas" viewBox="0 0 1440 220" preserveAspectRatio="none"><path d="M0 220V150l60-6 18-40h70l14 34 46 4 10-60h96l12 52 40 8 30-22h60l20 26 90 4 14-70h120l16 70 60 6 20-30h70l24 30 70 2 18-56h104l18 56 50 4 26-24h66l22 30 46 2v94Z" fill="#d9875a" opacity=".55"/><path d="M0 220v-40l120-8 30-30h80l40 34 140 4 40-26h90l30 30 160 6 30-40h120l30 40 170 4 40-28h80l36 30 104 2v32Z" fill="#c9693f" opacity=".5"/></svg>
+      </div>
+      <img class="acme-desert" src="assets/lab/desert.webp" alt="" aria-hidden="true">
+      <img class="acme-signpost" src="assets/lab/signpost.png" alt="" aria-hidden="true">
+
+      <div class="acme-grid">
+        <h2 class="acme-title"><img src="assets/lab/lab-title.webp" alt="Laboratório ACME — O Coiote inventa. Você escolhe. O Papa-Léguas entrega." width="375" height="232"></h2>
+
+        <div class="paper acme-mission">
+          <div class="paper-in">
+            <h3>Sua missão</h3>
+            <p class="paper-sub">Personalize seu combo e deixe a gente cuidar do resto!</p>
+
+            <div class="m-row">
+              <span class="m-ico"><i data-lucide="coins"></i></span>
+              <div class="m-body">
+                <div class="m-head"><label for="labBudget">Orçamento</label><b id="labBudgetValue">R$ 40</b></div>
+                <input type="range" id="labBudget" min="15" max="150" step="5" value="40">
+                <div class="m-scale"><span>R$ 15</span><span>R$ 150</span></div>
+              </div>
+            </div>
+
+            <div class="m-row">
+              <span class="m-ico"><i data-lucide="users"></i></span>
+              <div class="m-body">
+                <span class="m-label">Para quantas pessoas?</span>
+                <strong class="m-value" id="labPeopleText">2 pessoas</strong>
+                <div class="seg" role="radiogroup" aria-label="Para quantas pessoas?">
+                  <button type="button" role="radio" data-people="1" aria-checked="false"><i data-lucide="user"></i>1</button>
+                  <button type="button" role="radio" data-people="2" aria-checked="true"><i data-lucide="users"></i>2</button>
+                  <button type="button" role="radio" data-people="4" aria-checked="false"><i data-lucide="users-round"></i>3-4</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="m-row m-food">
+              <span class="m-ico" id="labFoodIcon"></span>
+              <button type="button" class="food-toggle" id="foodToggle" aria-expanded="false" aria-controls="foodList">
+                <span class="m-label">Missão gastronômica</span>
+                <strong class="m-value" id="labFoodText">Hambúrguer</strong>
+                <i data-lucide="chevron-right" class="food-chev"></i>
+              </button>
+            </div>
+            <div class="food-list" id="foodList" role="radiogroup" aria-label="Missão gastronômica" hidden></div>
+
+            <p class="hand-note"><svg viewBox="0 0 40 30" aria-hidden="true"><path d="M34 26C20 27 8 22 6 6M6 6l-4 7M6 6l7 4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>Ajuste aqui se quiser mudar algo!</p>
+          </div>
+        </div>
+
+        <div class="acme-center">
+          <img class="bubble b-prep" src="assets/lab/bubble-preparando.png" alt="" aria-hidden="true">
+          <img class="bubble b-jeito" src="assets/lab/bubble-jeito.png" alt="" aria-hidden="true">
+          <div class="machine" id="machine">
+            <img class="machine-img" src="assets/lab/machine.webp" alt="Máquina de invenções ACME montando o seu combo" width="639" height="636">
+            <span class="steam" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+            <span class="m-lamp" aria-hidden="true"></span>
+            <ul class="m-checklist" id="machineChecklist" aria-label="Ingredientes da invenção"></ul>
+            <span class="m-capsule" id="machineCapsule" aria-hidden="true"><span class="cap-cover"><span class="cap-icon" id="capsuleIcon"></span></span><span class="cap-flash"></span><span class="cap-bubbles"><i></i><i></i><i></i><i></i><i></i></span></span>
+            <span class="m-screen" id="machineScreen" aria-hidden="true"></span>
+            <button type="button" class="m-button" id="machineButton" aria-label="Apertar o botão vermelho e inventar outra opção"></button>
+          </div>
+          <p class="button-hint"><i data-lucide="mouse-pointer-click"></i> Aperte o botão vermelho para outra invenção</p>
+        </div>
+
+        <aside class="paper acme-result" aria-labelledby="comboName">
+          <div class="paper-in" id="resultCard" aria-live="polite">
+            <span class="today-tag">Sua invenção de hoje:</span>
+            <h3 class="combo-name" id="comboName">Combo Beep-Burguer</h3>
+            <p class="combo-tagline" id="comboTagline">Tamanho ideal para grandes momentos.</p>
+            <ul class="combo-items" id="comboItems"></ul>
+            <div class="price-wrap">
+              <div class="price-brush"><span>Apenas</span><strong id="comboPrice">R$ 37<sup>,90</sup></strong></div>
+            </div>
+            <p class="budget-note" id="budgetNote"></p>
+            <div class="respect"><img src="assets/lab/bird.png" alt="" width="59" height="60"><span id="comboSlogan">Um combo de respeito. E de velocidade também!</span></div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="acme-band">
+        <img class="dash-bird" src="assets/lab/bird.png" alt="" aria-hidden="true">
+        <span class="beep-tag">Beep-Beep!</span>
+        <ul class="band-feats">
+          <li><i data-lucide="leaf"></i><span>Ingredientes de<br>alta qualidade</span></li>
+          <li><i data-lucide="timer"></i><span id="featTime">Pronto em<br>~25 min</span></li>
+          <li><i data-lucide="users"></i><span id="featPeople">Ideal para<br>2 pessoas</span></li>
+        </ul>
+        <div class="band-cta">
+          <button type="button" class="acme-cta" id="wantCombo"><i data-lucide="zap"></i><span>Quero esse combo!</span><i data-lucide="chevron-right"></i></button>
+          <small>*Preços e produtos ilustrativos. Podem não estar disponíveis na sua região ou variar conforme o restaurante.</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <footer id="sobre">
+    <div class="footer-brand"><img src="assets/lab/bird.png" alt="" width="26" height="26"> PAPA-LÉGUAS<small>DELIVERY CO.</small></div>
+    <div class="footer-slogan"><i data-lucide="zap" class="slogan-icon"></i> Mais que delivery. É uma corrida.</div>
+    <div class="footer-links"><span><i data-lucide="smartphone"></i> App em breve</span><span><i data-lucide="shield-check"></i> Pagamento seguro</span><span><i data-lucide="headphones"></i> Suporte 24h</span><span class="social-icons" aria-label="Redes sociais"><i data-lucide="instagram"></i><i data-lucide="music-2"></i><i data-lucide="youtube"></i></span></div>
+  </footer>
+  <dialog class="location-dialog" id="locationDialog" aria-labelledby="locationTitle"><div class="dialog-head"><h2 id="locationTitle"><i data-lucide="map-pin"></i> Onde vamos entregar?</h2><button class="dialog-close" id="closeLocation" type="button" aria-label="Fechar">×</button></div><form class="location-form" id="locationForm"><label for="cityInput">Digite sua cidade e estado</label><input id="cityInput" name="city" autocomplete="address-level2" placeholder="Ex.: Aracaju, SE" required maxlength="80"><p style="margin:0;font-size:12px;color:#5a7082">Por enquanto, a localização é apenas um protótipo visual. Não usamos seu GPS.</p><div class="dialog-actions"><button class="secondary-btn" id="cancelLocation" type="button">Cancelar</button><button class="cta" type="submit">Salvar localização</button></div></form></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    if (window.lucide) lucide.createIcons();
+    const toast = document.getElementById('toast');
+    let toastTimer;
+    function notify(message){
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=>toast.classList.remove('show'), 2600);
+    }
+    document.getElementById('searchForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const query = document.getElementById('foodSearch').value.trim();
+      notify(query ? `Procurando as melhores opções para “${query}”...` : 'Digite o que você está com vontade de comer.');
+    });
+    document.querySelectorAll('[data-action]').forEach(button => button.addEventListener('click', () => notify(`Missão selecionada: ${button.dataset.action}. Em breve você verá os restaurantes!`)));
+    document.querySelectorAll('[data-restaurant]').forEach(button => button.addEventListener('click', () => notify(`Abrindo ${button.dataset.restaurant}. O cardápio chega em breve!`)));
+    document.querySelectorAll('.fav').forEach(button => button.addEventListener('click', () => { const on = button.getAttribute('aria-pressed') !== 'true'; button.setAttribute('aria-pressed', String(on)); notify(on ? 'Restaurante favoritado.' : 'Removido dos favoritos.'); }));
+    document.getElementById('playButton').addEventListener('click', () => notify('Prepare-se para a corrida! O mini game chega em breve.'));
+    const locationDialog = document.getElementById('locationDialog');
+    const cityInput = document.getElementById('cityInput');
+    document.getElementById('openLocation').addEventListener('click', () => { cityInput.value = document.getElementById('currentCity').textContent; locationDialog.showModal(); cityInput.focus(); });
+    function closeLocation(){ locationDialog.close(); }
+    document.getElementById('closeLocation').addEventListener('click', closeLocation);
+    document.getElementById('cancelLocation').addEventListener('click', closeLocation);
+    document.getElementById('locationForm').addEventListener('submit', e => { e.preventDefault(); const city = cityInput.value.trim().replace(/\s+/g, ' '); if(!city) return; document.getElementById('currentCity').textContent = city; closeLocation(); notify(`Local de entrega atualizado para ${city}.`); });
+    /* ===== Laboratório ACME ===== */
+    (() => {
+      const SVG = {
+        burger: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5C4 6.9 7.6 4.5 12 4.5s8 2.4 8 6H4Z"/><path d="M9 7.5h.01M12 6.8h.01M15 7.5h.01"/><path d="M3 13.4c1.5 0 1.5 1 3 1s1.5-1 3-1 1.5 1 3 1 1.5-1 3-1 1.5 1 3 1 1.5-1 3-1"/><path d="M4 16.6h16v.4a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 17v-.4Z"/></svg>',
+        fries: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 10.5 7.3 20.5h9.4l1.8-10"/><path d="M5 10.5h14"/><path d="M8 10.5V4.8M10.7 10.5V3.6M13.3 10.5V4.2M16 10.5V5.4"/><path d="M9.5 15.5a2.5 2 0 0 0 5 0"/></svg>',
+        check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 13l5 5L20 5"/></svg>'
+      };
+      const icon = name => SVG[name] || `<i data-lucide="${name}"></i>`;
+      const half = n => Math.ceil(n / 2);
+      const pl = (n, one, many) => `${n} ${n === 1 ? one : many}`;
+
+      // Cardápio do laboratório: cada categoria tem invenções (do mais rápido ao mais caprichado)
+      const FOODS = {
+        burger: { label: 'Hambúrguer', icon: 'burger', capsule: null, inventions: [
+          { name: 'Combo Beep-Express', tagline: 'Rápido como um beep-beep.', slogan: 'Saiu antes de você piscar!', time: 15,
+            check: ['Pão macio', 'Carne 100g', 'Queijo prato', 'Molho da casa', 'Embalagem turbo'],
+            items: n => [ { i: 'burger', t: pl(n, 'Burger Clássico', 'Burgers Clássicos'), d: 'Pão macio, carne de 100g, queijo e molho da casa.', p: 10.9 * n },
+                          { i: 'cup-soda', t: pl(n, 'Refri lata 350ml', 'Refris lata 350ml'), d: 'Gelado na medida.', p: 3.5 * n } ] },
+          { name: 'Combo Beep-Burguer', tagline: 'Tamanho ideal para grandes momentos.', slogan: 'Um combo de respeito. E de velocidade também!', time: 25,
+            check: ['Pão brioche', 'Hambúrguer artesanal', 'Queijo cheddar', 'Bacon crocante', 'Molhos especiais'],
+            items: n => [ { i: 'burger', t: pl(n, 'Burger Artesanal', 'Burgers Artesanais'), d: 'Pão brioche, 150g de carne, cheddar, bacon e molhos especiais.', p: 12.9 * n },
+                          { i: 'fries', t: half(n) === 1 ? (n === 1 ? 'Batata Média' : 'Batata Grande') : `${half(n)} Batatas Grandes`, d: 'Crocante e no ponto certo.', p: n === 1 ? 7.9 : 7.9 * half(n) },
+                          { i: 'cup-soda', t: pl(n, 'Refrigerante 350ml', 'Refrigerantes 350ml'), d: 'Geladinho para acompanhar.', p: 2.1 * n } ] },
+          { name: 'Combo Dinamite ACME', tagline: 'Explosivo — no bom sentido.', slogan: 'Esse explode de sabor, não na cara do Coiote.', time: 25,
+            check: ['Pão brioche', 'Carne 150g', 'Pepper jack', 'Jalapeño', 'Maionese defumada'],
+            items: n => [ { i: 'burger', t: pl(n, 'Burger Dinamite', 'Burgers Dinamite'), d: 'Brioche, 150g, pepper jack, jalapeño e maionese defumada.', p: 14.9 * n },
+                          { i: 'fries', t: half(n) === 1 ? 'Batata Rústica' : `${half(n)} Batatas Rústicas`, d: 'Com páprica e alecrim.', p: 8.9 * half(n) },
+                          { i: 'cup-soda', t: pl(n, 'Refrigerante 350ml', 'Refrigerantes 350ml'), d: 'Para apagar o incêndio.', p: 2.1 * n } ] },
+          { name: 'Combo Mega Turbo', tagline: 'Para fomes de proporções desérticas.', slogan: 'Potência máxima. Freio opcional.', time: 30,
+            check: ['Smash duplo', 'Cheddar em dobro', 'Cebola caramelizada', 'Onion rings', 'Milkshake'],
+            items: n => [ { i: 'burger', t: pl(n, 'Burger Duplo Smash', 'Burgers Duplo Smash'), d: 'Dois smash de 90g, cheddar duplo e cebola caramelizada.', p: 19.9 * n },
+                          { i: 'fries', t: half(n) === 1 ? 'Batata + Onion Rings' : `${half(n)} Porções Batata + Onion`, d: 'A dupla mais crocante do deserto.', p: 14.9 * half(n) },
+                          { i: 'cup-soda', t: pl(n, 'Milkshake 300ml', 'Milkshakes 300ml'), d: 'Chocolate, morango ou baunilha.', p: 9.9 * n } ] }
+        ]},
+        pizza: { label: 'Pizza', icon: 'pizza', capsule: 'pizza', inventions: [
+          { name: 'Pizza Relâmpago', tagline: 'Do forno pra sua porta num piscar.', slogan: 'Redonda, quente e veloz.', time: 30,
+            check: ['Massa fina', 'Molho de tomate', 'Mussarela', 'Orégano', 'Forno a lenha'],
+            items: n => [ { i: 'pizza', t: n === 1 ? 'Pizza Broto Mussarela' : n === 2 ? 'Pizza Grande Mussarela' : '2 Pizzas Grandes Mussarela', d: n === 1 ? '4 fatias de pura mussarela.' : '8 fatias por pizza, borda dourada.', p: n === 1 ? 16.9 : 34.9 * (n / 2) },
+                          { i: 'cup-soda', t: n === 1 ? 'Refri lata 350ml' : n === 2 ? 'Refrigerante 1L' : 'Refrigerante 2L', d: 'Bem gelado.', p: n === 1 ? 3.5 : n === 2 ? 7.9 : 11.9 } ] },
+          { name: 'Combo Pizza Turbo', tagline: 'Meio a meio, cem por cento sabor.', slogan: 'Meia calabresa, meia pepperoni, inteira veloz.', time: 35,
+            check: ['Massa longa fermentação', 'Calabresa', 'Pepperoni', 'Mussarela', 'Borda recheada'],
+            items: n => [ { i: 'pizza', t: n === 1 ? 'Pizza Broto Meio a Meio' : n === 2 ? 'Pizza Grande Meio a Meio' : '2 Pizzas Grandes Meio a Meio', d: 'Calabresa + pepperoni com borda de catupiry.', p: n === 1 ? 21.9 : 44.9 * (n / 2) },
+                          { i: 'cup-soda', t: n === 1 ? 'Refri lata 350ml' : n === 2 ? 'Refrigerante 1L' : 'Refrigerante 2L', d: 'Geladinho para acompanhar.', p: n === 1 ? 3.5 : n === 2 ? 7.9 : 11.9 } ] },
+          { name: 'Banquete ACME', tagline: 'Pizza premium com sobremesa no final.', slogan: 'Nem o Coiote planejou algo tão bom.', time: 40,
+            check: ['Massa artesanal', 'Pepperoni', 'Burrata', 'Manjericão', 'Brotinho de chocolate'],
+            items: n => [ { i: 'pizza', t: n === 1 ? 'Pizza Broto Premium' : n === 2 ? 'Pizza Grande Premium' : '2 Pizzas Grandes Premium', d: 'Pepperoni, burrata e manjericão fresco.', p: n === 1 ? 27.9 : 57.9 * (n / 2) },
+                          { i: 'cake-slice', t: 'Brotinho de Chocolate', d: 'Chocolate ao leite com morango.', p: 18.9 },
+                          { i: 'cup-soda', t: n === 1 ? 'Refri lata 350ml' : n === 2 ? 'Refrigerante 1L' : 'Refrigerante 2L', d: 'Para fechar o banquete.', p: n === 1 ? 3.5 : n === 2 ? 7.9 : 11.9 } ] }
+        ]},
+        mercado: { label: 'Mercado', icon: 'shopping-basket', capsule: 'shopping-basket', inventions: [
+          { name: 'Kit Café Turbo', tagline: 'Café da manhã sem sair de casa.', slogan: 'Acordou, pediu, chegou.', time: 20,
+            check: ['Pão francês', 'Presunto', 'Queijo', 'Leite ou suco', 'Frutas'],
+            items: n => [ { i: 'croissant', t: pl(n, 'Kit Pão e Frios', 'Kits Pão e Frios'), d: 'Pão francês, presunto e queijo.', p: 6.9 * n },
+                          { i: 'milk', t: half(n) === 1 ? 'Leite ou Suco 1L' : `${half(n)} Leites ou Sucos 1L`, d: 'Você escolhe na entrega.', p: 6.9 * half(n) },
+                          { i: 'apple', t: 'Frutas da Estação', d: `${n * 3} unidades selecionadas.`, p: 3.9 * n } ] },
+          { name: 'Kit Noite de Filme', tagline: 'Pipoca pronta antes dos trailers.', slogan: 'Aperta o play que o resto é com a gente.', time: 20,
+            check: ['Pipoca', 'Refrigerante 2L', 'Chocolate', 'Salgadinho', 'Guardanapos'],
+            items: n => [ { i: 'popcorn', t: pl(half(n), 'Pipoca de Micro-ondas', 'Pipocas de Micro-ondas'), d: 'Manteiga ou natural.', p: 4.9 * half(n) },
+                          { i: 'cup-soda', t: pl(half(n), 'Refrigerante 2L', 'Refrigerantes 2L'), d: 'Pra durar o filme todo.', p: 10.9 * half(n) },
+                          { i: 'candy', t: pl(n, 'Chocolate', 'Chocolates'), d: 'Barra de 90g.', p: 6.9 * n },
+                          { i: 'cookie', t: pl(half(n), 'Salgadinho', 'Salgadinhos'), d: 'Pacote família.', p: 8.9 * half(n) } ] },
+          { name: 'Kit Abastecimento ACME', tagline: 'Geladeira cheia em tempo recorde.', slogan: 'Despensa abastecida na velocidade da luz.', time: 35,
+            check: ['Hortifrúti', 'Carnes', 'Arroz e feijão', 'Bebidas', 'Sacolas reforçadas'],
+            items: n => [ { i: 'carrot', t: 'Hortifrúti Selecionado', d: 'Legumes, verduras e frutas.', p: 9.9 * n },
+                          { i: 'beef', t: 'Carnes e Proteínas', d: 'Frango, carne moída e ovos.', p: 14.9 * n },
+                          { i: 'wheat', t: 'Mercearia Básica', d: 'Arroz, feijão, massa e molho.', p: 19.9 * half(n) },
+                          { i: 'glass-water', t: 'Bebidas', d: 'Água, suco e refrigerante.', p: 9.9 * half(n) } ] }
+        ]},
+        bebidas: { label: 'Bebidas', icon: 'cup-soda', capsule: 'cup-soda', inventions: [
+          { name: 'Refresco Beep', tagline: 'Sede no deserto? Resolvido.', slogan: 'Gelado chegando a toda velocidade.', time: 15,
+            check: ['Refri lata', 'Água mineral', 'Gelo', 'Canudo', 'Pressa'],
+            items: n => [ { i: 'cup-soda', t: pl(n, 'Refri lata 350ml', 'Refris lata 350ml'), d: 'Escolha o sabor na entrega.', p: 3.5 * n },
+                          { i: 'glass-water', t: pl(n, 'Água Mineral 500ml', 'Águas Minerais 500ml'), d: 'Com ou sem gás.', p: 2.5 * n } ] },
+          { name: 'Sucos do Deserto', tagline: 'Natural, gelado e cheio de energia.', slogan: 'Vitamina de quem corre muito.', time: 20,
+            check: ['Laranja', 'Maracujá', 'Limão', 'Gelo', 'Sem conservantes'],
+            items: n => [ { i: 'citrus', t: pl(n, 'Suco Natural 500ml', 'Sucos Naturais 500ml'), d: 'Laranja, maracujá ou limão.', p: 8.9 * n },
+                          { i: 'glass-water', t: pl(n, 'Água com Gás', 'Águas com Gás'), d: '500ml, bem gelada.', p: 3.5 * n } ] },
+          { name: 'Festa Gelada ACME', tagline: 'Para brindar a vitória sobre a fome.', slogan: 'Gelo suficiente para esfriar até o Coiote.', time: 25,
+            check: ['Refrigerante 2L', 'Chá gelado', 'Milkshake', 'Gelo 5kg', 'Copos'],
+            items: n => [ { i: 'cup-soda', t: pl(half(n), 'Refrigerante 2L', 'Refrigerantes 2L'), d: 'Sabores variados.', p: 10.9 * half(n) },
+                          { i: 'coffee', t: pl(n, 'Chá Gelado', 'Chás Gelados'), d: 'Pêssego ou limão.', p: 6.9 * n },
+                          { i: 'ice-cream-cone', t: pl(n, 'Milkshake 300ml', 'Milkshakes 300ml'), d: 'Chocolate, morango ou baunilha.', p: 9.9 * n },
+                          { i: 'glass-water', t: 'Gelo 5kg', d: 'Com copos descartáveis.', p: 9.9 } ] }
+        ]},
+        doces: { label: 'Doces', icon: 'ice-cream-cone', capsule: 'ice-cream-cone', inventions: [
+          { name: 'Docinho Express', tagline: 'Aquela vontade, resolvida já.', slogan: 'Doce na boca em tempo recorde.', time: 15,
+            check: ['Chocolate belga', 'Granulado', 'Forminha', 'Caixinha', 'Carinho'],
+            items: n => [ { i: 'candy', t: pl(n, 'Caixa de Brigadeiros', 'Caixas de Brigadeiros'), d: '4 brigadeiros gourmet por caixa.', p: 7.9 * n } ] },
+          { name: 'Combo Desejo Urgente', tagline: 'Bolo + sorvete: a dupla imbatível.', slogan: 'Desejo atendido na velocidade máxima.', time: 20,
+            check: ['Bolo de chocolate', 'Sorvete', 'Calda quente', 'Chantilly', 'Cereja'],
+            items: n => [ { i: 'cake-slice', t: pl(n, 'Fatia de Bolo', 'Fatias de Bolo'), d: 'Chocolate com calda quente.', p: 12.9 * n },
+                          { i: 'ice-cream-cone', t: pl(n, 'Sorvete 2 Bolas', 'Sorvetes 2 Bolas'), d: 'Creme, chocolate ou morango.', p: 9.9 * n } ] },
+          { name: 'Torre de Doces ACME', tagline: 'Uma invenção digna de laboratório.', slogan: 'Doce demais para caber num foguete.', time: 30,
+            check: ['Torta inteira', 'Brigadeiros', 'Milkshake', 'Morangos', 'Fita de presente'],
+            items: n => [ { i: 'cake-slice', t: 'Torta Inteira', d: '10 fatias: chocolate com morango.', p: 49.9 },
+                          { i: 'candy', t: 'Caixa com 12 Brigadeiros', d: 'Sabores sortidos.', p: 24.9 },
+                          { i: 'ice-cream-cone', t: pl(n, 'Milkshake 300ml', 'Milkshakes 300ml'), d: 'Para acompanhar.', p: 9.9 * n } ] }
+        ]},
+        surpresa: { label: 'Surpreenda-me', icon: 'dices', capsule: 'sparkles', inventions: [] }
+      };
+      const FOOD_KEYS = Object.keys(FOODS);
+
+      const $ = id => document.getElementById(id);
+      const stage = $('acmeStage'), budgetEl = $('labBudget');
+      const state = { food: 'burger', budget: 40, people: 2, pick: 0 };
+      let current = null, brewTimers = [], debounce;
+      const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      const priceHTML = v => { const [a, b] = v.toFixed(2).split('.'); return `R$ ${Number(a).toLocaleString('pt-BR')}<sup>,${b}</sup>`; };
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const refreshIcons = () => { if (window.lucide) lucide.createIcons(); };
+
+      function build(key, inv, n) {
+        const items = inv.items(n).map(it => ({ ...it, p: Math.round(it.p * 100) / 100 }));
+        return { key, inv, items, total: Math.round(items.reduce((s, it) => s + it.p, 0) * 100) / 100 };
+      }
+      // Monta a lista de opções que cabem no orçamento (da mais completa para a mais simples)
+      function options() {
+        const n = state.people;
+        const keys = state.food === 'surpresa' ? FOOD_KEYS.filter(k => k !== 'surpresa') : [state.food];
+        const all = keys.flatMap(k => FOODS[k].inventions.map(inv => build(k, inv, n)));
+        const fit = all.filter(o => o.total <= state.budget).sort((a, b) => b.total - a.total);
+        if (fit.length) return { list: state.food === 'surpresa' ? shuffle(fit) : fit, over: false };
+        return { list: all.sort((a, b) => a.total - b.total).slice(0, 1), over: true };
+      }
+      let surpriseSeed = Math.random();
+      function shuffle(arr) { let s = surpriseSeed * 9301; return arr.map(o => ({ o, r: (Math.sin(s++) + 1) % 1 })).sort((a, b) => a.r - b.r).map(x => x.o); }
+
+      function peopleText(n) { return n === 4 ? '3-4 pessoas' : pl(n, 'pessoa', 'pessoas'); }
+
+      function render(result) {
+        const { opt, over } = result; const { inv, items, total, key } = opt;
+        current = { ...opt, over };
+        $('comboName').textContent = inv.name.replace(/-/g, '\u2011');
+        $('comboTagline').textContent = inv.tagline;
+        $('comboSlogan').textContent = inv.slogan;
+        $('comboItems').innerHTML = items.map(it => `<li><span class="ci">${icon(it.i)}</span><span><strong>${it.t}</strong><small>${it.d}</small></span></li>`).join('');
+        $('comboPrice').innerHTML = priceHTML(total);
+        const note = $('budgetNote');
+        const rest = state.budget - total;
+        note.className = 'budget-note' + (over ? ' over' : '');
+        note.textContent = over ? `Passa ${brl(total - state.budget)} do seu orçamento. Aumente um pouco o limite para liberar mais invenções.` : rest >= 1 ? `Cabe no orçamento e ainda sobram ${brl(rest)}.` : 'Encaixou certinho no seu orçamento!';
+        $('featTime').innerHTML = `Pronto em<br>~${inv.time} min`;
+        $('featPeople').innerHTML = `Ideal para<br>${peopleText(state.people)}`;
+        const cap = $('machineCapsule'); const capKey = FOODS[key].capsule;
+        cap.classList.toggle('show-icon', !!capKey);
+        $('capsuleIcon').innerHTML = capKey ? icon(capKey) : '';
+        $('machineScreen').innerHTML = icon(FOODS[key].icon);
+        refreshIcons();
+        ['comboName', 'comboItems', 'comboPrice'].forEach(id => { const el = $(id); el.classList.remove('pop'); void el.offsetWidth; el.classList.add('pop'); });
+      }
+
+      function setChecklist(list, done) {
+        $('machineChecklist').innerHTML = list.map(t => `<li class="${done ? 'done' : ''}"><span>${t}</span><span class="ck">${SVG.check}</span></li>`).join('');
+      }
+
+      function brew() {
+        brewTimers.forEach(clearTimeout); brewTimers = [];
+        const { list, over } = options();
+        const opt = list[state.pick % list.length];
+        const card = document.querySelector('.acme-result');
+        if (reduced) { setChecklist(opt.inv.check, true); render({ opt, over }); return; }
+        stage.classList.add('is-brewing'); card.classList.add('brewing');
+        setChecklist(opt.inv.check, false);
+        const lis = [...$('machineChecklist').children];
+        lis.forEach((li, i) => brewTimers.push(setTimeout(() => li.classList.add('done'), 220 + i * 200)));
+        brewTimers.push(setTimeout(() => { stage.classList.remove('is-brewing'); card.classList.remove('brewing'); render({ opt, over }); }, 220 + lis.length * 200 + 150));
+      }
+
+      // Controles
+      function syncBudget() {
+        state.budget = Number(budgetEl.value);
+        $('labBudgetValue').textContent = `R$ ${state.budget}`;
+        budgetEl.style.setProperty('--pct', ((state.budget - budgetEl.min) / (budgetEl.max - budgetEl.min) * 100) + '%');
+        budgetEl.setAttribute('aria-valuetext', `R$ ${state.budget}`);
+      }
+      budgetEl.addEventListener('input', () => { syncBudget(); state.pick = 0; clearTimeout(debounce); debounce = setTimeout(brew, 380); });
+
+      document.querySelectorAll('.seg [data-people]').forEach(btn => btn.addEventListener('click', () => {
+        state.people = Number(btn.dataset.people); state.pick = 0;
+        document.querySelectorAll('.seg [data-people]').forEach(b => b.setAttribute('aria-checked', String(b === btn)));
+        $('labPeopleText').textContent = peopleText(state.people);
+        brew();
+      }));
+
+      const foodList = $('foodList'), foodToggle = $('foodToggle');
+      foodList.innerHTML = FOOD_KEYS.map(k => `<button type="button" class="food-opt" role="radio" data-food="${k}" aria-checked="${k === state.food}">${icon(FOODS[k].icon)}<span>${FOODS[k].label}</span></button>`).join('');
+      function setFoodHeader() { $('labFoodText').textContent = FOODS[state.food].label; $('labFoodIcon').innerHTML = icon(FOODS[state.food].icon); refreshIcons(); }
+      foodToggle.addEventListener('click', () => { const open = foodToggle.getAttribute('aria-expanded') !== 'true'; foodToggle.setAttribute('aria-expanded', String(open)); foodList.hidden = !open; });
+      foodList.addEventListener('click', e => {
+        const btn = e.target.closest('[data-food]'); if (!btn) return;
+        state.food = btn.dataset.food; state.pick = 0; surpriseSeed = Math.random();
+        foodList.querySelectorAll('[data-food]').forEach(b => b.setAttribute('aria-checked', String(b === btn)));
+        setFoodHeader(); foodToggle.setAttribute('aria-expanded', 'false'); foodList.hidden = true; if (e.detail === 0) foodToggle.focus();
+        brew();
+      });
+
+      $('machineButton').addEventListener('click', () => {
+        const { list, over } = options();
+        if (list.length < 2) { notify(over ? 'Com esse orçamento a máquina só consegue uma invenção. Aumente o limite!' : 'Essa é a única invenção que cabe aqui. Tente mudar o orçamento!'); }
+        state.pick++; if (state.food === 'surpresa') surpriseSeed = Math.random();
+        brew();
+      });
+
+      $('wantCombo').addEventListener('click', () => {
+        if (!current) return;
+        const sup = document.querySelector('.cart sup'); const cart = document.querySelector('.cart');
+        if (sup) sup.textContent = String((parseInt(sup.textContent, 10) || 0) + 1);
+        if (cart) { cart.classList.remove('bump'); void cart.offsetWidth; cart.classList.add('bump'); }
+        const band = document.querySelector('.acme-band'); band.classList.remove('dash'); void band.offsetWidth; band.classList.add('dash');
+        notify(`${current.inv.name} (${brl(current.total)}) foi para o carrinho. Beep-beep!`);
+      });
+
+      syncBudget(); setFoodHeader();
+      const first = options(); setChecklist(first.list[0].inv.check, true); render({ opt: first.list[0], over: first.over });
+    })();
+    const homeView = document.getElementById('home');
+    const labView = document.getElementById('laboratorio');
+    const navLinks = [...document.querySelectorAll('.main-nav a')];
+    const navIds = ['restaurantes','ofertas','beepbeep','sobre'];
+    function route(initial){
+      const id = decodeURIComponent(location.hash.slice(1));
+      const isLab = id === 'laboratorio';
+      homeView.hidden = isLab; labView.hidden = !isLab; document.body.classList.toggle('lab-mode', isLab);
+      const current = isLab ? 'laboratorio' : (navIds.includes(id) ? id : 'inicio');
+      navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+      if (isLab) { window.scrollTo({top:0}); return; }
+      const target = id && id !== 'inicio' ? document.getElementById(id) : null;
+      if (target) target.scrollIntoView({block:'start'}); else if (initial !== true) window.scrollTo({top:0});
+    }
+    window.addEventListener('hashchange', () => route());
+    document.querySelectorAll('[data-go]').forEach(el => { const go = () => { location.hash = el.dataset.go; }; el.addEventListener('click', go); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(); } }); });
+    route(true);
+  </script>
+</body>
+</html>

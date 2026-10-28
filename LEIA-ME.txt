@@ -1,0 +1,60 @@
+PAPA-LÉGUAS DELIVERY — VERSÃO COM ESPAÇOS EM BRANCO
+=====================================================
+
+Esta versão remove as imagens da referência e substitui os arquivos visuais por imagens brancas,
+mantendo as dimensões dos espaços reservados para que você possa inserir suas próprias artes.
+
+Como abrir:
+1. Extraia o ZIP.
+2. Abra index.html no navegador.
+3. Edite index.html no VS Code para trocar textos, cores, dimensões e caminhos das imagens.
+
+Arquivos visuais em assets/:
+- hero.jpg: área visual do topo (placeholder branco)
+- burger.jpg, pizza.jpg, market.jpg, dessert.jpg: imagens dos quatro cards
+- promo.jpg: arte da promoção
+- footer.jpg: textura/arte do rodapé
+
+Para inserir uma imagem, substitua o arquivo correspondente mantendo o mesmo nome, ou altere o caminho
+no HTML/CSS. O cabeçalho, tipografias, botões e layout permanecem no lugar; a navegação e ações são
+demonstrativas e ainda não estão ligadas a um backend real.
+
+
+ÍCONES:
+A interface usa ícones vetoriais da biblioteca Lucide via CDN (internet necessária para carregá-los).
+A biblioteca é open source e os ícones são renderizados como SVG; você pode alterar os nomes data-lucide
+no index.html para escolher outros ícones em https://lucide.dev/icons.
+
+
+ATUALIZAÇÕES DESTA VERSÃO
+-------------------------
+- Aba "Laboratório ACME" no menu (também abre pelo item do bloco "Por que pedir com o Papa-Léguas?").
+- Seção "Restaurantes em destaque" com as fotos vindas do Pexels (licença gratuita, sem obrigação de crédito):
+  burger (foto 33213590), pizza (6223198), mercado (796580) e sobremesa (4078187).
+  Elas carregam da internet; se falharem, o site usa automaticamente burger.jpg, pizza.jpg,
+  market.jpg e dessert.jpg da pasta assets/. Para usar imagens próprias, troque o src de cada card.
+- Card "Acompanhe seu pedido" sobre o hero e card "Teste sua velocidade" alinhado à direita, como na referência.
+- Rodapé em azul (antes o texto branco ficava sobre fundo branco).
+
+
+LABORATÓRIO ACME (repaginado)
+-----------------------------
+- A aba virou um cenário interativo no deserto, montado com as artes recortadas em assets/lab/
+  (máquina, título, balões, placa, faixa do deserto e silhueta do pássaro).
+- "Sua missão": orçamento (R$ 15–150), pessoas (1, 2 ou 3-4) e missão gastronômica
+  (Hambúrguer, Pizza, Mercado, Bebidas, Doces ou Surpreenda-me).
+- A cada ajuste a máquina "prepara" a invenção: treme, solta vapor, marca os ingredientes na
+  plaquinha, troca o ícone da tela/cápsula e mostra o combo que cabe no orçamento.
+- Botão vermelho da máquina: gera outra invenção que também cabe no orçamento.
+- "Quero esse combo!": soma 1 no carrinho do topo e mostra um aviso.
+- Os combos e preços ficam no objeto FOODS no fim do index.html (fácil de editar).
+- Fontes novas: Bangers e Kalam (Google Fonts).
+
+
+ATUALIZAÇÃO — LOGO E MISSÕES
+----------------------------
+- Logo do topo e do rodapé: o ícone SVG (Lucide "send") foi substituído por assets/lab/bird.png.
+- Seção "Escolha sua próxima missão": os 4 cards agora usam fotos gratuitas do Unsplash (Unsplash License,
+  uso livre, crédito opcional): hambúrguer (Amirali Mirhashemian), pizza (Janice Lin), feira/legumes
+  (Lumin Osity) e bolo de chocolate (Umesh Soni). Carregam da internet; se falharem, o site usa
+  automaticamente burger.jpg, pizza.jpg, market.jpg e dessert.jpg da pasta assets/.
